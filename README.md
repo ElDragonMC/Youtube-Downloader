@@ -10,6 +10,6 @@ Portable version: [youtube_downloader.zip](https://github.com/ElDragonMC/Youtube
 
 Unzip the file and run youtube_downloader.exe
 
-Instalator: [youtube_downloader.exe](https://dash.infracraft.fun/v3/file?token=eyJhbGciOiJFUzI1NiIsImtpZCI6ImZ4NUk4WEY4Q005NHhHSW5aTjgxVkRyNGpEdExxTE5zazlhSkFlaGRJRlkiLCJ0eXAiOiJKV1QifQ.eyJ1c2VybmFtZSI6ImVuZGVyIiwicm9sZSI6ImFkbWluIiwiaWQiOjEsImlzcyI6InppbWFvcyIsImV4cCI6MTc5MDIwMjg3OSwibmJmIjoxNzkwMTkyMDc5LCJpYXQiOjE3OTAxOTIwNzl9.7WgoWVhAgxQRu8Lhuzv4CCHC9BQAdbOJUUdf7c_dcgMTMqWSh1EFF318A3yismOiCyMQT1S1v904u7mWC3BQkQ&files=%5B%22%2Fmedia%2FZimaOS-HD%2FFile+Server%2Fyoutube_downloader_installer.exe%22%5D&action=download)
+Instalator: [youtube_downloader.exe](https://github.com/ElDragonMC/Youtube-Downloader/releases/download/Release/youtube_downloader_installer.exe)
 
 Run the installer and enjoy
