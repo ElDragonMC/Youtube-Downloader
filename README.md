@@ -6,10 +6,10 @@ A CLI GUI for yt-dlp to download youtube videos to MP3 or MP4
 It adds a GUI to yt-dlp to make it easier to download youtube videos to MP3 or MP4
 
 # INSTALLATION
-Portable version: [youtube_downloader.zip](https://github.com/ElDragonMC/Youtube-Downloader/releases/download/Release/youtube_downloader.zip)
+Portable version: [youtube_downloader.zip](https://github.com/ElDragonMC/Youtube-Downloader/releases/download/1.0.1/youtube_downloader.zip)
 
 Unzip the file and run youtube_downloader.exe
 
-Instalator: [youtube_downloader.exe](https://github.com/ElDragonMC/Youtube-Downloader/releases/download/Release/youtube_downloader_installer.exe)
+Instalator: [youtube_downloader.exe](https://github.com/ElDragonMC/Youtube-Downloader/releases/download/1.0.1/youtube_downloader_installer.exe)
 
 Run the installer and enjoy
