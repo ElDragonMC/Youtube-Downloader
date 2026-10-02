@@ -1,1 +1,226 @@
-404: Not Found
+@echo off
+setlocal EnableExtensions EnableDelayed Expansion
+
+title Youtube Downloader
+color 0A
+
+:: =================
+::   CONFIGURATION
+:: =================
+
+set "YTDLP=yt-dlp.exe"
+set "FFMPEG=ffmpeg"
+set "DOWNLOADS=%USERPROFILE%\Downloads"
+
+:: ======================
+::   CHECK DEPENDENCIES
+:: ======================
+
+if not exist "%YTDLP%" (
+    color 0C
+    cls
+    echo.
+    echo ===============================
+    echo   ERROR: yt-dlp was not found
+    echo ===============================
+    echo.
+    echo It was expected to find:
+    echo %YTDLP%
+    echo.
+    pause
+    exit /b 2
+)
+
+if not exist "%FFMPEG%\ffmpeg.exe" (
+    color 0C
+    cls
+    echo.
+    echo ===============================
+    echo   ERROR: FFmpeg was not found
+    echo ===============================
+    echo.
+    echo It was expected to find:
+    echo %FFMPEG%\ffmpeg.exe
+    echo.
+    pause
+    exit /b 2
+)
+
+:: =============
+::   MAIN MENU
+:: =============
+
+:menu
+cls
+color 0B
+
+echo.
+echo ======================================
+echo           Youtube Downloader
+echo            by Amat Danes :D
+echo ======================================
+echo.
+echo              MAIN MENU
+echo --------------------------------------
+echo      [1] Download to MP3
+echo      [2] Download to MP4
+echo      [3] Exit
+echo --------------------------------------
+echo.
+
+set /p "choice=Selection: "
+
+if "%choice%"=="1" goto mp3
+if "%choice%"=="2" goto mp4
+if "%choice%"=="3" goto exit
+goto menu
+
+:: =======
+::   MP3
+:: =======
+
+:mp3
+cls
+color0E
+
+echo.
+echo ======================================
+echo           Download to MP3
+echo ======================================
+echo.
+echo Enter the Youtube URL here:
+echo.
+set /p "url=URL: "
+
+if not defined url goto menu
+
+echo.
+echo ======================================
+echo          Downloading MP3...
+echo ======================================
+echo.
+echo.
+
+cd /d "%~dp0"
+
+"%YTDLP%" ^
+    -x ^
+    --audio-format mp3 ^
+    --audio-quality 0 ^
+    --ffmpeg-location "%FFMPEG%" ^
+    --windows-filenames ^
+    --trim-filenames 120 ^
+    --parse-metadata "title:%(title)s" ^
+    --replace-in-metadata title "(?i)(official video|official music video|lyrics|audio|hd|4k)" "" ^
+    -o "%DOWNLOADS%\%%(title)s.%%(ext)s" ^
+    "%url%"
+
+set "RESULT=%ERRORLEVEL%"
+
+if "%RESULT%"=="0" (
+    set "download_status=OK"
+) else (
+    set "download_status=ERROR"
+)
+
+goto done
+
+:: =======
+::   MP4
+:: =======
+
+:mp4
+cls
+color 0E
+
+echo.
+echo ======================================
+echo            Download to MP4
+echo ======================================
+echo.
+echo Enter the Youtube URL here:
+echo.
+set /p "url=URL: "
+
+if not defined url goto menu
+
+echo.
+echo ======================================
+echo          Downloading MP4...
+echo ======================================
+echo.
+echo.
+
+cd /d "%~dp0"
+
+"%YTDLP%" ^
+    -f "bv*+ba[ext=m4a]/b[ext=mp4]" ^
+    --merge-output-format mp4 ^
+    --ffmpeg-location "%FFMPEG%" ^
+    --windows-filenames ^
+    --trim-filenames 120 ^
+    -o "%DOWNLOADS%\%%(title)s.%%(ext)s" ^
+    "%url%"
+
+set "RESULT=%ERRORLEVEL%"
+
+if "%RESULT%"=="0" (
+    set "download_status==OK"
+) else (
+    set "download_status=ERROR"
+)
+
+goto done
+
+:: ==============
+::   END SCREEN
+:: ==============
+
+:done
+cls
+color 0B
+
+echo.
+echo ======================================
+echo           Youtube Downloader
+echo            by Amat Danes :D
+echo ======================================
+echo.
+
+if "%download_status%"=="OK" (
+    echo  dd
+    echo        DOWNLOAD COMPLETED
+    echo --------------------------------------
+    echo.
+    echo The file was downloaded to:
+    echo %DOWNLOADS%
+) else (
+    color 0C
+    echo           DOWNLOAD ERROR
+    echo --------------------------------------
+    echo.
+    echo yt-dlp has returned the code: %RESULT%
+    echo.
+    echo Check the error code shown previously.
+)
+
+echo.
+echo --------------------------------------
+echo      [1] Close
+echo      [2] Download another file
+echo --------------------------------------
+echo.
+
+set /p "opt=Selection: "
+
+if "%opt%"=="1" goto exit
+if "%opt%"=="2" goto menu
+goto done
+
+:: =========
+::   SALIR
+:: =========
+
+:exit
+endlocal
+exit /b 0
